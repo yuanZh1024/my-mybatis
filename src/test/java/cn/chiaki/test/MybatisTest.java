@@ -25,7 +25,7 @@ public class MybatisTest {
     private SqlSession sqlSession;
 
     @Before
-    public void init() throws IOException {
+    public void init() {
         // 读取MyBatis的配置文件
         in = Resources.getResourcesAsStream("mybatis-config.xml");
         // 创建SqlSessionFactory的构建者对象
