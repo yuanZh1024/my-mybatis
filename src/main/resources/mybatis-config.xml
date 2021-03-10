@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 配置环境-->
+    <environments default="development">
+        <!-- 配置MySQL的环境-->
+        <environment id="development">
+            <!--  配置事务类型-->
+            <transactionManager type="JDBC"/>
+            <!--  配置数据源-->
+            <dataSource type="POOLED">
+                <!-- 配置连接数据库的四个基本信息-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis_demo?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="admin"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 指定映射配置文件的位置，映射配置文件的时每个dao独立的配置文件-->
+    <mappers>
+        <!-- 使用xml配置文件的方式：resource标签 -->
+        <mapper resource="mapper/StudentMapper.xml"/>
+        <!-- 使用注解方式：class标签 -->
+        <!--<mapper class="cn.chiaki.mapper.StudentMapper"/>-->
+    </mappers>
+</configuration>

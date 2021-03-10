@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="cn.chiaki.mapper.StudentMapper">
+    <select id="findAll" resultType="cn.chiaki.entity.Student">
+        SELECT * FROM student
+    </select>
+</mapper>
