@@ -1,8 +1,8 @@
 package cn.chiaki.mybatis.utils;
 
 import cn.chiaki.mybatis.annotations.Select;
-import cn.chiaki.mybatis.cfg.Configuration;
-import cn.chiaki.mybatis.cfg.Mapper;
+import cn.chiaki.mybatis.configuration.Configuration;
+import cn.chiaki.mybatis.configuration.Mapper;
 import cn.chiaki.mybatis.io.Resources;
 import org.dom4j.Attribute;
 import org.dom4j.Document;

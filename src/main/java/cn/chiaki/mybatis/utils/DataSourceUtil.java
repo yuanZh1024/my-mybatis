@@ -1,6 +1,6 @@
 package cn.chiaki.mybatis.utils;
 
-import cn.chiaki.mybatis.cfg.Configuration;
+import cn.chiaki.mybatis.configuration.Configuration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

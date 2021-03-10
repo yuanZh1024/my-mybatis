@@ -1,6 +1,6 @@
 package cn.chiaki.mybatis.sqlsession.defaults;
 
-import cn.chiaki.mybatis.cfg.Configuration;
+import cn.chiaki.mybatis.configuration.Configuration;
 import cn.chiaki.mybatis.sqlsession.SqlSession;
 import cn.chiaki.mybatis.sqlsession.SqlSessionFactory;
 

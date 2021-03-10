@@ -1,6 +1,6 @@
 package cn.chiaki.mybatis.utils;
 
-import cn.chiaki.mybatis.cfg.Mapper;
+import cn.chiaki.mybatis.configuration.Mapper;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;

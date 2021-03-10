@@ -1,6 +1,6 @@
 package cn.chiaki.mybatis.sqlsession.proxy;
 
-import cn.chiaki.mybatis.cfg.Mapper;
+import cn.chiaki.mybatis.configuration.Mapper;
 import cn.chiaki.mybatis.utils.Executor;
 
 import java.lang.reflect.InvocationHandler;

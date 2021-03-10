@@ -1,4 +1,4 @@
-package cn.chiaki.mybatis.cfg;
+package cn.chiaki.mybatis.configuration;
 
 import lombok.Data;
 
