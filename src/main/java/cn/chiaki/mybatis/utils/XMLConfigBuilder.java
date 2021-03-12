@@ -31,7 +31,7 @@ public class XMLConfigBuilder {
      * @return Configuration对象
      */
     @SuppressWarnings("unchecked")
-    public static Configuration loadConfiguration(InputStream in) {
+    public static Configuration parse(InputStream in) {
         try {
             Configuration configuration = new Configuration();
             // 获取SAXReader对象

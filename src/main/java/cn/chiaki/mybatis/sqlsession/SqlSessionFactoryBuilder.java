@@ -20,7 +20,7 @@ public class SqlSessionFactoryBuilder {
      * @return SqlSessionFactory
      */
     public SqlSessionFactory build(InputStream in) {
-        Configuration configuration = XMLConfigBuilder.loadConfiguration(in);
+        Configuration configuration = XMLConfigBuilder.parse(in);
         return new DefaultSqlSessionFactory(configuration);
     }
 }
