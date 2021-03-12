@@ -67,9 +67,9 @@ public class XMLConfigBuilder {
             List<Element> mapperElements = root.selectNodes("//mappers/mapper");
             // 遍历集合
             for (Element mapperElement : mapperElements) {
-                // 判断mapperElement使用的属性
+                // 获得resource标签下的内容
                 Attribute resourceAttribute = mapperElement.attribute("resource");
-                // 如果存在resource标签则解析xml文件
+                // 如果resource标签下内容不为空则解析xml文件
                 if (resourceAttribute != null) {
                     String mapperXMLPath = resourceAttribute.getValue();
                     // 获取xml路径解析SQL并封装成mappers
@@ -77,7 +77,9 @@ public class XMLConfigBuilder {
                     // 设置Configuration
                     configuration.setMappers(mappers);
                 }
+                // 获得class标签下的内容
                 Attribute classAttribute = mapperElement.attribute("class");
+                // 如果class标签下内容不为空则解析注解
                 if (classAttribute != null) {
                     String mapperClassPath = classAttribute.getValue();
                     // 解析注解对应的SQL封装成mappers
@@ -97,7 +99,6 @@ public class XMLConfigBuilder {
                 e.printStackTrace();
             }
         }
-
     }
 
     /**
