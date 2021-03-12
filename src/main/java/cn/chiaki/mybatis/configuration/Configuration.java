@@ -26,5 +26,5 @@ public class Configuration {
     private String password;
 
     /**  mappers的Map集合  **/
-    private Map<String, Mapper> mappers = new HashMap<>();
+    private Map<String, MappedStatement> mappers = new HashMap<>();
 }

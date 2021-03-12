@@ -2,7 +2,7 @@ package cn.chiaki.mybatis.utils;
 
 import cn.chiaki.mybatis.annotations.Select;
 import cn.chiaki.mybatis.configuration.Configuration;
-import cn.chiaki.mybatis.configuration.Mapper;
+import cn.chiaki.mybatis.configuration.MappedStatement;
 import cn.chiaki.mybatis.io.Resources;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
@@ -73,7 +73,7 @@ public class XMLConfigBuilder {
                 if (resourceAttribute != null) {
                     String mapperXMLPath = resourceAttribute.getValue();
                     // 获取xml路径解析SQL并封装成mappers
-                    Map<String, Mapper> mappers = loadMapperConfiguration(mapperXMLPath);
+                    Map<String, MappedStatement> mappers = loadMapperConfiguration(mapperXMLPath);
                     // 设置Configuration
                     configuration.setMappers(mappers);
                 }
@@ -81,7 +81,7 @@ public class XMLConfigBuilder {
                 if (classAttribute != null) {
                     String mapperClassPath = classAttribute.getValue();
                     // 解析注解对应的SQL封装成mappers
-                    Map<String, Mapper> mappers = loadMapperAnnotation(mapperClassPath);
+                    Map<String, MappedStatement> mappers = loadMapperAnnotation(mapperClassPath);
                     // 设置Configuration
                     configuration.setMappers(mappers);
                 }
@@ -107,12 +107,12 @@ public class XMLConfigBuilder {
      * @throws IOException IO异常
      */
     @SuppressWarnings("unchecked")
-    private static Map<String, Mapper> loadMapperConfiguration(String mapperXMLPath) throws IOException {
+    private static Map<String, MappedStatement> loadMapperConfiguration(String mapperXMLPath) throws IOException {
         InputStream in = null;
         try {
             // key值由mapper接口的全限定类名与方法名组成
             // value值是要执行的SQL语句以及实体类的全限定类名
-            Map<String, Mapper> mappers = new HashMap<>();
+            Map<String, MappedStatement> mappers = new HashMap<>();
             // 获取输入流并根据输入流获取Document节点
             in = Resources.getResourcesAsStream(mapperXMLPath);
             SAXReader saxReader = new SAXReader();
@@ -129,10 +129,10 @@ public class XMLConfigBuilder {
                 String resultType = selectElement.attributeValue("resultType");
                 String queryString = selectElement.getText();
                 String key = namespace + "." + id;
-                Mapper mapper = new Mapper();
-                mapper.setQueryString(queryString);
-                mapper.setResultType(resultType);
-                mappers.put(key,mapper);
+                MappedStatement mappedStatement = new MappedStatement();
+                mappedStatement.setQueryString(queryString);
+                mappedStatement.setResultType(resultType);
+                mappers.put(key, mappedStatement);
             }
             return mappers;
         } catch (Exception e){
@@ -151,8 +151,8 @@ public class XMLConfigBuilder {
      * @return 封装完成的mappers集合
      * @throws IOException IO异常
      */
-    private static Map<String, Mapper> loadMapperAnnotation(String mapperClassPath) throws Exception{
-        Map<String,Mapper> mappers = new HashMap<>();
+    private static Map<String, MappedStatement> loadMapperAnnotation(String mapperClassPath) throws Exception{
+        Map<String, MappedStatement> mappers = new HashMap<>();
         // 获取mapper接口对应的Class对象
         Class<?> mapperClass = Class.forName(mapperClassPath);
         // 获取mapper接口中的方法
@@ -162,11 +162,11 @@ public class XMLConfigBuilder {
             boolean isAnnotated = method.isAnnotationPresent(Select.class);
             if (isAnnotated) {
                 // 创建Mapper对象
-                Mapper mapper = new Mapper();
+                MappedStatement mappedStatement = new MappedStatement();
                 // 取出注解的value属性值
                 Select selectAnnotation = method.getAnnotation(Select.class);
                 String queryString = selectAnnotation.value();
-                mapper.setQueryString(queryString);
+                mappedStatement.setQueryString(queryString);
                 // 获取当前方法的返回值及泛型
                 Type type = method.getGenericReturnType();
                 // 校验泛型
@@ -176,14 +176,14 @@ public class XMLConfigBuilder {
                     Class<?> clazz = (Class<?>) types[0];
                     String resultType = clazz.getName();
                     // 给Mapper赋值
-                    mapper.setResultType(resultType);
+                    mappedStatement.setResultType(resultType);
                 }
                 // 给key赋值
                 String methodName = method.getName();
                 String className = method.getDeclaringClass().getName();
                 String key = className + "." + methodName;
                 // 填充mappers
-                mappers.put(key,mapper);
+                mappers.put(key, mappedStatement);
             }
         }
         return mappers;

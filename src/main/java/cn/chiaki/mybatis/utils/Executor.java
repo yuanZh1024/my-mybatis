@@ -1,6 +1,6 @@
 package cn.chiaki.mybatis.utils;
 
-import cn.chiaki.mybatis.configuration.Mapper;
+import cn.chiaki.mybatis.configuration.MappedStatement;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
@@ -18,27 +18,27 @@ import java.util.List;
  */
 public class Executor {
 
-    public Object query(Mapper mapper, Connection connection) {
-        return selectList(mapper, connection);
+    public Object query(MappedStatement mappedStatement, Connection connection) {
+        return selectList(mappedStatement, connection);
     }
 
     /**
      * selectList()方法
-     * @param mapper mapper接口
+     * @param mappedStatement mapper接口
      * @param connection 数据库连接
      * @param <T> 泛型
      * @return 结果
      */
-    public <T> List<T> selectList(Mapper mapper, Connection connection) {
+    public <T> List<T> selectList(MappedStatement mappedStatement, Connection connection) {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
             // 取出SQL语句
-            String queryString = mapper.getQueryString();
+            String queryString = mappedStatement.getQueryString();
             // 取出结果类型
-            String resultType = mapper.getResultType();
+            String resultType = mappedStatement.getResultType();
             Class<?> clazz = Class.forName(resultType);
             // 获取PreparedStatement对象并执行
             preparedStatement = connection.prepareStatement(queryString);

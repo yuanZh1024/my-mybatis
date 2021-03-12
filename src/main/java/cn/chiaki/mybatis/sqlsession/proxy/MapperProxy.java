@@ -1,6 +1,6 @@
 package cn.chiaki.mybatis.sqlsession.proxy;
 
-import cn.chiaki.mybatis.configuration.Mapper;
+import cn.chiaki.mybatis.configuration.MappedStatement;
 import cn.chiaki.mybatis.utils.Executor;
 
 import java.lang.reflect.InvocationHandler;
@@ -15,10 +15,10 @@ import java.util.Map;
  */
 public class MapperProxy implements InvocationHandler {
 
-    private final Map<String, Mapper> mappers;
+    private final Map<String, MappedStatement> mappers;
     private final Connection connection;
 
-    public MapperProxy(Map<String, Mapper> mappers, Connection connection) {
+    public MapperProxy(Map<String, MappedStatement> mappers, Connection connection) {
         this.mappers = mappers;
         this.connection = connection;
     }
@@ -32,11 +32,11 @@ public class MapperProxy implements InvocationHandler {
         // 组合key
         String key = className + "." + methodName;
         // 获取mappers中的Mapper对象
-        Mapper mapper = mappers.get(key);
+        MappedStatement mappedStatement = mappers.get(key);
         // 判断是否有mapper
-        if (mapper != null) {
+        if (mappedStatement != null) {
             // 调用工具类查询所有
-            return new Executor().query(mapper, connection);
+            return new Executor().query(mappedStatement, connection);
         }
         else {
             throw new IllegalArgumentException("传入参数有误");

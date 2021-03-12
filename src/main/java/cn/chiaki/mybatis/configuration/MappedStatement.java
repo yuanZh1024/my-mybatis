@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2021-03-13 10:22
  */
 @Data
-public class Mapper {
+public class MappedStatement {
 
     /**  SQL语句  **/
     private String queryString;
