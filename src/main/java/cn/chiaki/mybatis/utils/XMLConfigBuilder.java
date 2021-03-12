@@ -73,7 +73,7 @@ public class XMLConfigBuilder {
                 if (resourceAttribute != null) {
                     String mapperXMLPath = resourceAttribute.getValue();
                     // 获取xml路径解析SQL并封装成mappers
-                    Map<String, MappedStatement> mappers = loadMapperConfiguration(mapperXMLPath);
+                    Map<String, MappedStatement> mappers = parseMapperConfiguration(mapperXMLPath);
                     // 设置Configuration
                     configuration.setMappers(mappers);
                 }
@@ -81,7 +81,7 @@ public class XMLConfigBuilder {
                 if (classAttribute != null) {
                     String mapperClassPath = classAttribute.getValue();
                     // 解析注解对应的SQL封装成mappers
-                    Map<String, MappedStatement> mappers = loadMapperAnnotation(mapperClassPath);
+                    Map<String, MappedStatement> mappers = parseMapperAnnotation(mapperClassPath);
                     // 设置Configuration
                     configuration.setMappers(mappers);
                 }
@@ -107,7 +107,7 @@ public class XMLConfigBuilder {
      * @throws IOException IO异常
      */
     @SuppressWarnings("unchecked")
-    private static Map<String, MappedStatement> loadMapperConfiguration(String mapperXMLPath) throws IOException {
+    private static Map<String, MappedStatement> parseMapperConfiguration(String mapperXMLPath) throws IOException {
         InputStream in = null;
         try {
             // key值由mapper接口的全限定类名与方法名组成
@@ -151,7 +151,7 @@ public class XMLConfigBuilder {
      * @return 封装完成的mappers集合
      * @throws IOException IO异常
      */
-    private static Map<String, MappedStatement> loadMapperAnnotation(String mapperClassPath) throws Exception{
+    private static Map<String, MappedStatement> parseMapperAnnotation(String mapperClassPath) throws Exception{
         Map<String, MappedStatement> mappers = new HashMap<>();
         // 获取mapper接口对应的Class对象
         Class<?> mapperClass = Class.forName(mapperClassPath);
