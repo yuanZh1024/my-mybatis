@@ -25,6 +25,6 @@ public class Configuration {
     /**  密码  **/
     private String password;
 
-    /**  mappers的Map集合  **/
+    /**  mappers集合  **/
     private Map<String, MappedStatement> mappers = new HashMap<>();
 }
