@@ -1,12 +1,15 @@
 package cn.chiaki.mybatis.sqlsession.defaults;
 
 import cn.chiaki.mybatis.configuration.Configuration;
+import cn.chiaki.mybatis.configuration.MappedStatement;
 import cn.chiaki.mybatis.sqlsession.SqlSession;
-import cn.chiaki.mybatis.sqlsession.proxy.MapperProxy;
+import cn.chiaki.mybatis.sqlsession.proxy.MapperProxyFactory;
 import cn.chiaki.mybatis.utils.DataSourceUtil;
+import cn.chiaki.mybatis.utils.Executor;
 
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * SqlSession默认实现类
@@ -34,7 +37,7 @@ public class DefaultSqlSession implements SqlSession {
     public <T> T getMapper(Class<T> mapperInterfaceClass) {
         return (T) Proxy.newProxyInstance(mapperInterfaceClass.getClassLoader(),
                 new Class[]{mapperInterfaceClass},
-                new MapperProxy(configuration.getMappers(), connection));
+                new MapperProxyFactory(configuration.getMappers(), connection));
 
     }
 

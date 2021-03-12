@@ -13,12 +13,12 @@ import java.util.Map;
  * @author chenliang258
  * @date 2021-03-13 11:04
  */
-public class MapperProxy implements InvocationHandler {
+public class MapperProxyFactory implements InvocationHandler {
 
     private final Map<String, MappedStatement> mappers;
     private final Connection connection;
 
-    public MapperProxy(Map<String, MappedStatement> mappers, Connection connection) {
+    public MapperProxyFactory(Map<String, MappedStatement> mappers, Connection connection) {
         this.mappers = mappers;
         this.connection = connection;
     }
