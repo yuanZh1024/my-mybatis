@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.util.Map;
 
 /**
- * 自定义MapperProxy实现invoke()方法
+ * 自定义MapperProxyFactory实现invoke()方法
  * @author chenliang258
  * @date 2021-03-13 11:04
  */
