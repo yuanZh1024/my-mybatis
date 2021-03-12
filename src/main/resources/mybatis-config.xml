@@ -20,8 +20,8 @@
     <!-- 指定映射配置文件的位置，映射配置文件的时每个dao独立的配置文件-->
     <mappers>
         <!-- 使用xml配置文件的方式：resource标签 -->
-        <!--<mappedStatement resource="mappedStatement/StudentMapper.xml"/>-->
+        <mapper resource="mapper/StudentMapper.xml"/>
         <!-- 使用注解方式：class标签 -->
-        <mappedStatement class="cn.chiaki.mappedStatement.StudentMapper"/>
+        <!--<mapper class="cn.chiaki.mappedStatement.StudentMapper"/>-->
     </mappers>
 </configuration>
